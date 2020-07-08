@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -76,5 +77,15 @@ public class UIManager : MonoBehaviour
         {
             view.SetActive(true);
         }
+    }
+
+    public void goToApp()
+    {
+        SceneManager.LoadScene("tutorial");
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("mainMenu");
     }
 }
