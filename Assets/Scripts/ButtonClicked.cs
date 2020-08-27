@@ -14,7 +14,7 @@ public class ButtonClicked : MonoBehaviour
     {
         string _text;
         _text = button.GetComponentInChildren<Text>().text;
-        if (_text == quizMgr.target.Name)
+        if (_text == quizMgr.target)
         {
             button.image.color = Color.green;
             scoreMgr.ScorePlus();

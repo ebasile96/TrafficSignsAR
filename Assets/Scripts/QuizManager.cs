@@ -17,20 +17,33 @@ public class QuizManager : MonoBehaviour
     public List<Button> buttonToClearList = new List<Button>();
     int index;
     [HideInInspector]
-    public Recognizer target;
+    public string target;
 
-    
- 
-    //methods
+
+    private void Update()
+    {
+        DefineTarget();
+    }
+    public void DefineTarget()
+    {
+        IEnumerable<TrackableBehaviour> tbs = TrackerManager.Instance.GetStateManager().GetActiveTrackableBehaviours();
+        foreach (TrackableBehaviour tb in tbs)
+        {
+            target = tb.name;
+        }
+    }
+
+//methods
     public void OnTargetFound()
     {
         QuizTab.SetActive(true);
-        target = FindObjectOfType<Recognizer>();
+        //definire target
+        
         foreach (Text buttonText in buttons)
         {
             index = UnityEngine.Random.Range(0, SignsNames.Count);
             buttonText.text = SignsNames[index];
-            if (buttonText.text == target.Name)
+            if (buttonText.text == target)
                 buttonText.text = SignsNames[index + 1];
             answers.Add(buttonText);
         }
@@ -40,7 +53,7 @@ public class QuizManager : MonoBehaviour
     public void RightChoiseFiller()
     {
         index = UnityEngine.Random.Range(0, answers.Count);
-        answers[index].text = target.Name;
+        answers[index].text = target;
     }
 
     public void OnTargetLost()
@@ -55,8 +68,6 @@ public class QuizManager : MonoBehaviour
         {
             _button.image.color = new Color(0.4012f, 0.4259f, 0.5094f, 1);
         }
-        
- 
     }
 
     

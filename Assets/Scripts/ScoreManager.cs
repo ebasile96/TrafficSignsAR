@@ -5,8 +5,14 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
 {
-    public ButtonClicked ButClick;
     public int score;
+    public int Highscore;
+    string highScoreKey = "HighScore";
+
+    private void Start()
+    {
+        Highscore = PlayerPrefs.GetInt(highScoreKey, 0);
+    }
 
     public void ScorePlus()
     {
@@ -26,5 +32,14 @@ public class ScoreManager : MonoBehaviour
     {
         if (score <= 0)
             score = 0;
+    }
+
+    private void OnDisable()
+    {
+        if (score > Highscore)
+        {
+            PlayerPrefs.SetInt(highScoreKey, score);
+            PlayerPrefs.Save();
+        }
     }
 }

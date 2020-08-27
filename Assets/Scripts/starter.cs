@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class starter : MonoBehaviour
 {
-    
+    int currentScene;
+
+    private void Start()
+    {
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+    }
     void Update()
     {
         if(Input.touchCount > 0)
         {
-            SceneManager.LoadScene("0-Main");
+            SceneManager.LoadSceneAsync(currentScene +1);
         }
     }
 }
